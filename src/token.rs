@@ -1,11 +1,20 @@
+pub struct token;
+
 #[derive(Debug, Clone, PartialEq)]
 pub enum Token {
     // C语言中有六类
     Keyword(Keyword),  // 关键字
     Identifier(String), // 标识符
+    // 标识符的处理很简单 ，看见是什么就是什么
+    /*
+    0~9
+    a~z
+    A~Z
+    */
+
     Constant(i32), // 常量
-    String_literal(String), // 字符串常量
-    Operator(Operator), // 操作符和
+    StringLiteral(String), // 字符串常量
+    Operator(Operator), // 操作符号
     Punctuator(Punctuator), // 标点符号
 }
 
@@ -45,16 +54,48 @@ pub enum Keyword {
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Punctuator {
     // [] () {} * , : = ;
-    
+    OpenParen, // (
+    CloseParen, // )
+    OpenBracket, // [
+    CLoseBracket, // ]
+    OpenBrace, // {
+    CloseBrace, // }
+    Poniter, // *
+    Comma, // ,
+    COlon, // :
+    Semicolon, // ;
+    EqualSign, // =
 }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Operator {
-    
+    Plus,               // +
+    Minus,              // -
+    Multiplication,     // *
+    Division,           // /
+    Modulo,             // %
+    BitwiseComplement,  // ~
+    BitwiseShiftLeft,   // <<
+    BitwiseShiftRight,  // >>
+    BitwiseAnd,         // &
+    BitwiseOr,          // |
+    BitwiseXor,         // ^
+    LogicalNegation,    // !
+    LogicalAnd,         // &&
+    LogicalOr,          // ||
+    Equal,              // ==
+    NotEqual,           // !=
+    LessThan,           // <
+    LessThanOrEqual,    // <=
+    GreaterThan,        // >
+    GreaterThanOrEqual, // >=
+    Assignment,         // =
+    AssignPlus,         // +=
+    AssignMinus,        // -=
+    AssignMult,         // *=
+    AssignDiv,          // /=
+    AssignMod,          // %=
 }
 
 mod text {
-    use token;
-
-    
 }
