@@ -4,11 +4,8 @@ use std::io::Error;
 use std::io::Read;
 use std::process::exit;
 
-mod lex;
-mod token;
+mod cod;
 
-
-// mod token;
 
 fn main() {
     // 首先获取命令行的参数
@@ -28,12 +25,12 @@ fn main() {
     let tokens = match read_file(&args[1]) {
         
         // 在这里将所有的字符串进行lex
-        Ok(s) => lex(&s),
+        Ok(s) => cod::lex::lex(&s),
         Err(e) => {
             eprintln!("Error: {}", e);
             exit(1);
         }
-    }
+    };
 }
 
 fn read_file(input: &str) -> Result<String, Error> {

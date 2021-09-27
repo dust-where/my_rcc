@@ -1,5 +1,3 @@
-pub struct token;
-
 #[derive(Debug, Clone, PartialEq)]
 pub enum Token {
     // C语言中有六类
@@ -11,7 +9,6 @@ pub enum Token {
     a~z
     A~Z
     */
-
     Constant(i32), // 常量
     StringLiteral(String), // 字符串常量
     Operator(Operator), // 操作符号
@@ -53,18 +50,16 @@ pub enum Keyword {
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Punctuator {
-    // [] () {} * , : = ;
+    // [] () {} , : ;
     OpenParen, // (
     CloseParen, // )
     OpenBracket, // [
-    CLoseBracket, // ]
+    CloseBracket, // ]
     OpenBrace, // {
     CloseBrace, // }
-    Poniter, // *
     Comma, // ,
-    COlon, // :
+    Colon, // :
     Semicolon, // ;
-    EqualSign, // =
 }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -80,7 +75,7 @@ pub enum Operator {
     BitwiseAnd,         // &
     BitwiseOr,          // |
     BitwiseXor,         // ^
-    LogicalNegation,    // !
+    BitwiseNegation,    // !
     LogicalAnd,         // &&
     LogicalOr,          // ||
     Equal,              // ==
@@ -95,6 +90,8 @@ pub enum Operator {
     AssignMult,         // *=
     AssignDiv,          // /=
     AssignMod,          // %=
+    PlusPlus,           // ++
+    MinusMiuns,         // --
 }
 
 mod text {
