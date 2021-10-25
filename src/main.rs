@@ -4,6 +4,8 @@ use std::io::Error;
 use std::io::Read;
 use std::process::exit;
 
+use crate::cod::generator::generate;
+
 mod cod;
 
 
@@ -31,6 +33,18 @@ fn main() {
             exit(1);
         }
     };
+
+    println!("{:?}", tokens);
+
+    // TODO: Debug tokens
+
+    let ast = cod::parser::parser(&tokens);
+    
+    // TODO: Debug ast
+
+    println!("{:?}", ast);
+
+    generate(&ast);
 }
 
 fn read_file(input: &str) -> Result<String, Error> {

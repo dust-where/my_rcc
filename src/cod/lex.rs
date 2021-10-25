@@ -15,15 +15,12 @@ pub fn lex(input: &str) -> Vec<Token> {
             // c语言中的单字符
             '(' => tokens.push(Token::Punctuator(Punctuator::OpenParen)),
             ')' => tokens.push(Token::Punctuator(Punctuator::CloseParen)),
-            '[' => tokens.push(Token::Punctuator(Punctuator::OpenBracket)),
-            ']' => tokens.push(Token::Punctuator(Punctuator::CloseBracket)),
             '{' => tokens.push(Token::Punctuator(Punctuator::OpenBrace)),
             '}' => tokens.push(Token::Punctuator(Punctuator::CloseBrace)),
             ',' => tokens.push(Token::Punctuator(Punctuator::Comma)),
             ':' => tokens.push(Token::Punctuator(Punctuator::Colon)),
             ';' => tokens.push(Token::Punctuator(Punctuator::Semicolon)),
             '^' => tokens.push(Token::Operator(Operator::BitwiseXor)),
-            '~' => tokens.push(Token::Operator(Operator::BitwiseComplement)),
             // 不处理
             // ' ' | '\t' | '\n' | '\r' => {}
 
@@ -33,9 +30,6 @@ pub fn lex(input: &str) -> Vec<Token> {
                 if let Some(&'=') = input.peek() {
                     input.next();
                     tokens.push(Token::Operator(Operator::AssignPlus));
-                } else if let Some(&'+') = input.peek() {
-                    input.next();
-                    tokens.push(Token::Operator(Operator::PlusPlus));
                 } else {
                     tokens.push(Token::Operator(Operator::Plus));
                 }
@@ -44,9 +38,6 @@ pub fn lex(input: &str) -> Vec<Token> {
                 if let Some(&'=') = input.peek() {
                     input.next();
                     tokens.push(Token::Operator(Operator::AssignMinus));
-                } else if let Some(&'-') = input.peek() {
-                    input.next();
-                    tokens.push(Token::Operator(Operator::MinusMiuns));
                 } else {
                     tokens.push(Token::Operator(Operator::Minus));
                 }
@@ -80,7 +71,7 @@ pub fn lex(input: &str) -> Vec<Token> {
                     input.next();
                     tokens.push(Token::Operator(Operator::NotEqual));
                 } else {
-                    tokens.push(Token::Operator(Operator::BitwiseNegation));
+                    tokens.push(Token::Operator(Operator::LogicalNegation));
                 }
             }
             '&' => {
@@ -143,33 +134,14 @@ pub fn lex(input: &str) -> Vec<Token> {
                     }
 
                     match &s[..] {
-                        "auto" => tokens.push(Token::Keyword(Keyword::Auto)),
-                        "double" => tokens.push(Token::Keyword(Keyword::Double)),
                         "int" => tokens.push(Token::Keyword(Keyword::Int)),
-                        "struct" => tokens.push(Token::Keyword(Keyword::Struct)),
                         "break" => tokens.push(Token::Keyword(Keyword::Break)),
                         "else" => tokens.push(Token::Keyword(Keyword::Else)),
-                        "long" => tokens.push(Token::Keyword(Keyword::Long)),
-                        "switch" => tokens.push(Token::Keyword(Keyword::Switch)),
-                        "char" => tokens.push(Token::Keyword(Keyword::Char)),
-                        "extern" => tokens.push(Token::Keyword(Keyword::Extern)),
                         "return" => tokens.push(Token::Keyword(Keyword::Return)),
-                        "union" => tokens.push(Token::Keyword(Keyword::Union)),
-                        "const" => tokens.push(Token::Keyword(Keyword::Const)),
-                        "float" => tokens.push(Token::Keyword(Keyword::Float)),
-                        "short" => tokens.push(Token::Keyword(Keyword::Short)),
-                        "unsigned" => tokens.push(Token::Keyword(Keyword::Unsigned)),
                         "continue" => tokens.push(Token::Keyword(Keyword::Continue)),
                         "for" => tokens.push(Token::Keyword(Keyword::For)),
-                        "signed" => tokens.push(Token::Keyword(Keyword::Signed)),
-                        "void" => tokens.push(Token::Keyword(Keyword::Void)),
-                        "default" => tokens.push(Token::Keyword(Keyword::Default)),
-                        "goto" => tokens.push(Token::Keyword(Keyword::Goto)),
-                        "sizeof" => tokens.push(Token::Keyword(Keyword::Sizeof)),
-                        "voiatile" => tokens.push(Token::Keyword(Keyword::Voiatile)),
                         "do" => tokens.push(Token::Keyword(Keyword::Do)),
                         "if" => tokens.push(Token::Keyword(Keyword::If)),
-                        "static" => tokens.push(Token::Keyword(Keyword::Static)),
                         "while" => tokens.push(Token::Keyword(Keyword::While)),
                         _ => tokens.push(Token::Identifier(s)),
                     }

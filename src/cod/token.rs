@@ -10,51 +10,29 @@ pub enum Token {
     A~Z
     */
     Constant(i32), // 常量
-    StringLiteral(String), // 字符串常量
     Operator(Operator), // 操作符号
     Punctuator(Punctuator), // 标点符号
 }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Keyword {
-    // 28个关键字
-    Auto,
-    Double,
     Int,
-    Struct,
     Break,
     Else,
-    Long,
-    Switch,
-    Char,
-    Extern,
     Return,
-    Union,
-    Const,
-    Float,
-    Short,
-    Unsigned,
     Continue,
     For,
-    Signed,
-    Void,
-    Default,
-    Goto,
-    Sizeof,
-    Voiatile,
     Do,
     If,
-    Static,
     While,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Punctuator {
     // [] () {} , : ;
+    QuestionMark, // ?
     OpenParen, // (
     CloseParen, // )
-    OpenBracket, // [
-    CloseBracket, // ]
     OpenBrace, // {
     CloseBrace, // }
     Comma, // ,
@@ -69,30 +47,63 @@ pub enum Operator {
     Multiplication,     // *
     Division,           // /
     Modulo,             // %
-    BitwiseComplement,  // ~
+    
     BitwiseShiftLeft,   // <<
     BitwiseShiftRight,  // >>
     BitwiseAnd,         // &
     BitwiseOr,          // |
     BitwiseXor,         // ^
-    BitwiseNegation,    // !
+
+    LogicalNegation,    // !
     LogicalAnd,         // &&
     LogicalOr,          // ||
+
     Equal,              // ==
     NotEqual,           // !=
+    
     LessThan,           // <
     LessThanOrEqual,    // <=
     GreaterThan,        // >
     GreaterThanOrEqual, // >=
+
     Assignment,         // =
     AssignPlus,         // +=
     AssignMinus,        // -=
     AssignMult,         // *=
     AssignDiv,          // /=
     AssignMod,          // %=
-    PlusPlus,           // ++
-    MinusMiuns,         // --
 }
 
-mod text {
+impl Operator {
+    pub fn is_unary(self) -> bool { // - ! ~
+        match self {
+            Operator::Minus |
+            Operator::LogicalNegation => true,
+            _ => false,
+        }
+    }
+ 
+    pub fn is_bitwise_operators(self) -> bool { // << >> & | ^
+        match self {
+            Operator::BitwiseShiftLeft |
+            Operator::BitwiseShiftRight |
+            Operator::BitwiseAnd |
+            Operator::BitwiseOr | 
+            Operator::BitwiseXor => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_assignment_operators(self) -> bool { // = += -= *= /= %=
+        match self {
+            Operator::Assignment
+            | Operator::AssignPlus
+            | Operator::AssignMinus
+            | Operator::AssignMult
+            | Operator::AssignDiv
+            | Operator::AssignMod => true,
+            _ => false,
+        }
+    }
+    
 }
