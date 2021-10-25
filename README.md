@@ -1,9 +1,9 @@
 
 ### 关于
 
-本文借鉴于[github](https://github.com/shioyama18/rcc)并对其进行了说明
+本文借鉴于[github](https://github.com/shioyama18/rcc)并对其进行了补充与说明
 
-我认为原文的汇编代码写的有一定的问题，所以进行了部分修改，但不保证正确
+本文的汇编代码不一定正确
 
 ### 如何使用
 
