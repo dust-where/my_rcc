@@ -34,7 +34,7 @@ fn main() {
         }
     };
 
-    println!("{:?}", tokens);
+    // println!("{:?}", tokens);
 
     // TODO: Debug tokens
 
@@ -42,7 +42,7 @@ fn main() {
     
     // TODO: Debug ast
 
-    println!("{:?}", ast);
+    // println!("{:?}", ast);
 
     generate(&ast);
 }
