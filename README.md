@@ -1,8 +1,6 @@
 
 ### 关于
 
-本文借鉴于[github](https://github.com/shioyama18/rcc)并对其进行了补充与说明
-
 本文的汇编代码不一定正确
 
 ### 如何使用
